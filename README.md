@@ -2,35 +2,31 @@
 
 # Getting Started
 
-## Installing Ruby
+## Getting the repo
 
-[`rbenv`](https://github.com/rbenv/rbenv) is recommended.  
-Using system Ruby is possible, just make sure you have bundler installed, i.e. `$ gem install bundler`.
+```sh
+git clone git@github.com:ghivert/ironcoin-workshop.git
+cd ironcoin-workshop
+```
 
 ## Installing Node
 
 [Node.js](https://nodejs.org/) and NPM are required to use Truffle. You should take a look at Yarn if you're planning to use npm a lot.
 
 ```sh
-$ npm install -g truffle # yarn global add truffle for yarn users
+# NPM users
+npm install
 ```
 
-## Getting the repo
-
 ```sh
-$ git clone git@github.com:ghivert/RubyCoin.git
-$ cd RubyCoin
-$ bundle install
+# Yarn users
+yarn
 ```
 
 ## About Truffle
 
 You'll find everything you need on [their website](http://truffleframework.com/).  
 You'll need to download [Ganache](http://truffleframework.com/ganache/).
-
-## Getting the Ethereum toolchain
-
-Solidity is required too. You can find documentation on installation on [their page](https://solidity.readthedocs.io/en/v0.4.24/installing-solidity.html#binary-packages). Be careful to install `solc` and not `solc-js`.
 
 # You're good to go!
 
@@ -44,11 +40,11 @@ Solidity is required too. You can find documentation on installation on [their p
 Launch Ganache.
 
 ```sh
-$ truffle migrate
-$ bundle exec inesita server
+yarn migrate
+yarn start
 ```
 
-Go to [http://localhost:9292/](http://localhost:9292/)
+Go to [http://localhost:3000/](http://localhost:3000/)
 
 # How to use the app?
 
