@@ -11,8 +11,8 @@ const getBitcoinPrices = async dispatch => {
 }
 
 const getIroncoinBalance = (contract, account) => async dispatch => {
-  const result = await contract.methods.balanceOf(account).call()
-  const balance = parseInt(result, 10)
+  // Get the balance here
+  const balance = 1e9
   dispatch({ type: reducer.UPDATE_IRONCOIN_BALANCE, balance })
 }
 
@@ -23,16 +23,7 @@ const getEthereumBalance = account => async dispatch => {
 }
 
 const subscribeTransfer = (contract, account) => async dispatch => {
-  contract.events.Transfer().callback = (error, result) => {
-    if (!error) {
-      const { _value, _to, _from } = result.returnValues
-      if (_from.toLowerCase() === account.toLowerCase()) {
-        dispatch({ type: 'REMOVE_IRONCOIN', coins: _value })
-      } else if (_to.toLowerCase() === account.toLowerCase()) {
-        dispatch({ type: 'ADD_IRONCOIN', coins: _value })
-      }
-    }
-  }
+  // Do something here.
 }
 
 const sendTransaction = options => async dispatch => {
@@ -40,11 +31,9 @@ const sendTransaction = options => async dispatch => {
   const { to, valueContent } = sending
   if (to !== '' && valueContent !== 0) {
     if (sendCoins === 'ETH') {
-      const value = window.web3.utils.toWei(valueContent.toString())
-      await window.web3.eth.sendTransaction({ from: account, to, value })
+      // Send Ethers
     } else {
-      const value = valueContent
-      await contract.methods.transfer(to, value).send()
+      // Send coins
     }
   }
 }
