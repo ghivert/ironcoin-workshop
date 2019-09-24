@@ -20,7 +20,7 @@ contract IronCoin is Ownable {
   uint8  public decimals;
 
   constructor(
-    string _version
+    string memory _version
   ) Ownable() public {
     // Do Something here!
   }
