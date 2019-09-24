@@ -1,0 +1,80 @@
+.card {
+  border: 1px solid rgba(0, 40, 100, 0.12);
+  border-radius: 5px;
+  background-color: white;
+  margin: 24px 0;
+
+  &-header {
+    border-bottom: 1px solid rgba(0, 40, 100, 0.12);
+    background-color: rgba(205, 222, 249, 0.12);
+    padding: 6px 24px;
+    font-weight: bold;
+
+    &_variations {
+      display: flex;
+      padding: 24px 0;
+      border-bottom: 1px solid rgba(0, 40, 100, 0.12);
+
+      &_elem {
+        text-align: center;
+
+        .price {
+          font-size: 30px;
+        }
+
+        .sub-price {
+          font-size: 20px;
+          font-weight: 100;
+        }
+      }
+    }
+  }
+
+  .wallet-header {
+     justify-content: space-around;
+     padding: 24px 0;
+     border-bottom: none;
+  }
+
+  .send-coins {
+    display: flex;
+    justify-content: space-around;
+    padding: 24px;
+
+    &_coins-selector {
+      display: flex;
+      justify-content: space-around;
+      font-size: 1.2rem;
+      align-items: center;
+
+      .active {
+        background-color: $active_blue;
+        color: white;
+        font-weight: bold;
+      }
+    }
+
+    .sender {
+      padding: 0 24px;
+
+      &-inside {
+        max-width: 65%;
+        margin: auto;
+      }
+
+      input {
+        display: block;
+        margin-top: 6px;
+        width: 100%;
+        border: 1px solid rgba(0, 40, 100, 0.12);
+        border-radius: 3px;
+        padding: 6px;
+        outline: none;
+
+        &::placeholder {
+          color: $grey;
+        }
+      }
+    }
+  }
+}

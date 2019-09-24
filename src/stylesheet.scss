@@ -1,0 +1,70 @@
+@import './style/normalize';
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400');
+@import './style/colors';
+@import './style/container';
+@import './style/components/footer';
+@import './style/components/btn';
+@import './style/components/card';
+@import './style/helpers';
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Source Sans Pro';
+}
+
+img {
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+.navbar {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  border-bottom: 1px solid rgba(0, 40, 100, 0.12);
+
+  &_content {
+    display: flex;
+    line-height: 1.5;
+
+    a {
+      padding: 12px 0;
+      color: $grey;
+      transition: color .3s ease-in;
+      transition: border-bottom .3s ease-in;
+      border-bottom: 1px solid transparent;
+
+      &.active {
+        color: $active_blue;
+        border-bottom: 1px solid $active_blue;
+      }
+
+      i {
+        padding-right: 6px;
+      }
+    }
+  }
+}
+
+p {
+  margin: 0;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: rgb(244, 246, 251);
+}
+
+.app {
+  width: 100%;
+  margin: auto;
+  flex: 1;
+}

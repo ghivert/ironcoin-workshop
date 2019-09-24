@@ -1,0 +1,26 @@
+.flex {
+  display: flex;
+  align-items: baseline;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+@media (max-width: 768px) {
+  .mobile-column {
+    flex-direction: column;
+  }
+
+  .mobile-top-padding {
+    padding-top: 12px;
+  }
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.padding-6 {
+  padding: 6px 0;
+}
