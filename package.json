@@ -7,10 +7,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "front:test": "react-scripts test",
     "eject": "react-scripts eject",
     "migrate": "truffle migrate --reset",
-    "test-contract": "truffle test"
+    "test": "truffle test"
   },
   "dependencies": {
     "chart.js": "^2.9.3",
