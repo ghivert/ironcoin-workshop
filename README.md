@@ -37,6 +37,17 @@ You'll need to download [Ganache](http://truffleframework.com/ganache/).
 
 # How to run the dApp?
 
+Create a symlink for your OS.
+
+```bash
+# Windows
+mklink /D src\build "..\build"
+move /Y truffle.js truffle-config.js
+
+# Unix
+ln -s ./build ./src/build
+```
+
 Launch Ganache.
 
 ```sh
