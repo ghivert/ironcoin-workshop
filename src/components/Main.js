@@ -56,6 +56,7 @@ const Chart = ({ bitcoinValues }) => {
   return <Line data={data} options={options} />
 }
 
+// eslint-disable-next-line
 const BitcoinChart = props => {
   const { bitcoinValues, bitcoinCurrentValue } = useSelector(
     ({ bitcoinValues, bitcoinCurrentValue }) => ({
@@ -82,7 +83,7 @@ const BitcoinChart = props => {
 const Main = props => {
   return (
     <React.Fragment>
-      <BitcoinChart {...props} />
+      {/* <BitcoinChart {...props} /> */}
       <Wallet />
     </React.Fragment>
   )
