@@ -11,10 +11,7 @@ import { BrowserRouter } from 'react-router-dom'
 import * as Ethereum from 'Ethereum'
 import './stylesheet.css'
 
-const store = createStore(
-  reducer,
-  composeWithDevTools(applyMiddleware(thunk))
-)
+const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)))
 
 store.dispatch(Ethereum.connect())
 

@@ -1,4 +1,4 @@
-# RubyCoin
+# IronCoin
 
 # Getting Started
 
@@ -48,7 +48,7 @@ Go to [http://localhost:3000/](http://localhost:3000/)
 
 # How to use the app?
 
-- On your favorite web browser (chosen between Chrome, Firefox, Opera or Brave), download [Metamask](https://metamask.io/).  
+- On your favorite web browser (chosen between Chrome, Firefox, Opera or Brave), download [Metamask](https://metamask.io/).
 - Click on `import from seed phrase`.
 - Get your seed phrase from Ganache.
 - Create your Metamask account from this seed.

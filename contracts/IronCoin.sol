@@ -1,4 +1,4 @@
-pragma solidity ^0.5.8;
+pragma solidity ^0.5.0;
 
 import "./ownership/Ownable.sol";
 
@@ -19,9 +19,7 @@ contract IronCoin is Ownable {
   string public symbol;
   uint8  public decimals;
 
-  constructor(
-    string memory _version
-  ) Ownable() public {
+  constructor(string memory _version) Ownable() public {
     // Do Something here!
   }
 
@@ -48,7 +46,10 @@ contract IronCoin is Ownable {
   /// @param _spender The future approved spender.
   /// @param _value The maximum value the spender will be able to withdraw.
   /// @return True if approving successfull, False otherwise.
-  function approve(address _spender, uint _value) public returns (bool success) {
+  function approve(
+    address _spender,
+    uint _value
+  ) public returns (bool success) {
     // Do Something here!
   }
 
@@ -74,4 +75,5 @@ contract IronCoin is Ownable {
     address _spender
   ) public view returns (uint remaining) {
     // Do something here!
-  }}
+  }
+}

@@ -36,8 +36,8 @@ a {
     a {
       padding: 12px 0;
       color: $grey;
-      transition: color .3s ease-in;
-      transition: border-bottom .3s ease-in;
+      transition: color 0.3s ease-in;
+      transition: border-bottom 0.3s ease-in;
       border-bottom: 1px solid transparent;
 
       &.active {

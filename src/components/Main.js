@@ -1,6 +1,6 @@
 import React from 'react'
 import Wallet from 'components/Wallet'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 import VariationCell from 'components/VariationCell'
 import { Line } from 'react-chartjs-2'
 
@@ -28,19 +28,20 @@ const RenderVariation = ({ variation }) => {
 }
 
 const Chart = ({ bitcoinValues }) => {
-  const labels = Object
-    .keys(bitcoinValues)
+  const labels = Object.keys(bitcoinValues)
     .map(date => date.split('-'))
-    .map(([ year, month, day]) => `${month}/${day}/${year}`)
+    .map(([year, month, day]) => `${month}/${day}/${year}`)
   const data = {
     labels,
-    datasets: [{
-      data: Object.values(bitcoinValues),
-      backgroundColor: 'rgb(254, 232, 185)',
-      borderColor: 'rgb(252, 161, 21)',
-      borderWidth: 2,
-      pointRadius: 0,
-    }],
+    datasets: [
+      {
+        data: Object.values(bitcoinValues),
+        backgroundColor: 'rgb(254, 232, 185)',
+        borderColor: 'rgb(252, 161, 21)',
+        borderWidth: 2,
+        pointRadius: 0,
+      },
+    ],
   }
   const axe = {
     display: false,
@@ -50,14 +51,18 @@ const Chart = ({ bitcoinValues }) => {
     legend: { display: false },
     tooltips: { mode: 'nearest' },
     hover: { intersect: false },
-    scales: { xAxes: [axe], yAxes: [axe] }
+    scales: { xAxes: [axe], yAxes: [axe] },
   }
-  return (
-    <Line data={data} options={options} />
-  )
+  return <Line data={data} options={options} />
 }
 
-const BitcoinChart = ({ bitcoinValues, bitcoinCurrentValue }) => {
+const BitcoinChart = props => {
+  const { bitcoinValues, bitcoinCurrentValue } = useSelector(
+    ({ bitcoinValues, bitcoinCurrentValue }) => ({
+      bitcoinValues,
+      bitcoinCurrentValue,
+    })
+  )
   if (Object.keys(bitcoinValues).length > 0) {
     const variation = computeDiffPercentage(bitcoinCurrentValue, bitcoinValues)
     return (
@@ -74,13 +79,13 @@ const BitcoinChart = ({ bitcoinValues, bitcoinCurrentValue }) => {
   }
 }
 
-const Main = props => (
-  <React.Fragment>
-    <BitcoinChart {...props} />
-    <Wallet />
-  </React.Fragment>
-)
+const Main = props => {
+  return (
+    <React.Fragment>
+      <BitcoinChart {...props} />
+      <Wallet />
+    </React.Fragment>
+  )
+}
 
-const mapStateToProps = ({ bitcoinValues, bitcoinCurrentValue }) => ({ bitcoinValues, bitcoinCurrentValue })
-
-export default connect(mapStateToProps)(Main)
+export default Main

@@ -1,4 +1,4 @@
-pragma solidity ^0.5.8;
+pragma solidity ^0.5.0;
 
 /// @title Ownable
 /// @dev Defines an owner for a contract and grants him extra admin rights.
@@ -23,7 +23,9 @@ contract Ownable {
   /// @dev Transfer the ownership to a new owner. This can be done only by owner.
   /// @param _newOwner The future owner of the contract.
   /// @return True if transfer successfull, False otherwise.
-  function transferOwnership(address _newOwner) external onlyOwner returns (bool success) {
+  function transferOwnership(
+    address _newOwner
+  ) external onlyOwner returns (bool success) {
     require(_newOwner != address(0));
     emit OwnershipTransferred(owner, _newOwner);
     owner = _newOwner;
