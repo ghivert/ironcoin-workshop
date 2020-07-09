@@ -12,7 +12,7 @@ Bonus : Qu’est-ce qu’un crypto-collectible ? À quoi pourrait-on l’ide
 
 # Implémentation
 
-Dans la suite des exercices, nous souhaitons rajouter des fonctionnalités à notre contrat de token ERC20. (Voir annexe) Les deux exercices sont indépendants.
+Dans la suite des exercices, nous souhaitons rajouter des fonctionnalités à notre contrat de token ERC20. (Voir annexe) Les deux exercices sont indépendants. Ils peuvent être réalisés directement dans le fichiers `contracts/IronCoin.sol`.
 
 # Exercice 1 – Minting
 
@@ -64,23 +64,19 @@ contract IronCoin is Ownable {
   uint8  public decimals = 5;
 
   constructor(string memory _version) Ownable() public {
-    // Do Something here!
     version = _version;
     balances[msg.sender] = 1000000000;
   }
 
   function totalSupply() public pure returns (uint) {
-    // Do Something here!
     return 1000000000;
   }
 
   function balanceOf(address _owner) public view returns (uint) {
-    // Do Something here!
     return balances[_owner];
   }
 
   function transfer(address _to, uint _value) public returns (bool success) {
-    // Do Something here!
     address _from = msg.sender;
     require(balances[msg.sender] >= _value);
     emit Transfer(_from, _to, _value);
@@ -95,10 +91,8 @@ contract IronCoin is Ownable {
     address _spender,
     uint _value
   ) public returns (bool success) {
-    // Do Something here!
     address myself = msg.sender;
     allowances[myself][_spender] = _value;
-    // allowances[msg.sender][_spender] = _value;
     emit Approval(myself, _spender, _value);
     return true;
   }
@@ -108,7 +102,6 @@ contract IronCoin is Ownable {
     address _to,
     uint _value
   ) public returns (bool success) {
-    // Do Something here!
     bool allowed = allowances[_from][msg.sender] >= _value;
     bool enoughMoney = balances[_from] >= _value;
     require(enoughMoney && allowed);
@@ -123,7 +116,6 @@ contract IronCoin is Ownable {
     address _owner,
     address _spender
   ) public view returns (uint remaining) {
-    // Do something here!
     return allowances[_owner][_spender];
   }
 }
