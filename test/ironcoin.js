@@ -3,7 +3,7 @@ var IronCoin = artifacts.require('IronCoin')
 const amount = 10
 
 contract('IronCoin', function (accounts) {
-  const [accountOne, accountTwo] = accounts
+  const [accountOne, accountTwo, accountThree, accountFour] = accounts
 
   it('should have a total supply of 1e9', async function () {
     const instance = await IronCoin.deployed()
@@ -67,5 +67,67 @@ contract('IronCoin', function (accounts) {
     } else {
       expect(isApproved).to.be.false
     }
+  })
+
+  it('should be able to mint from owner', async function () {
+    const instance = await IronCoin.deployed()
+    const supply = await instance.totalSupply.call()
+    expect(supply.valueOf().toNumber()).to.equal(1e9)
+    await instance.mint(1000, { from: accountOne })
+    const newSupply = await instance.totalSupply.call()
+    expect(newSupply.valueOf().toNumber()).to.equal(1e9 + 1000)
+    try {
+      await instance.mint(1000, { from: accountTwo })
+      expect(true).to.be.false
+    } catch (error) {
+      expect(true).to.be.true
+    }
+  })
+
+  it('should be able to mint from minters', async function () {
+    const instance = await IronCoin.deployed()
+    const supply = await instance.totalSupply.call()
+    expect(supply.valueOf().toNumber()).to.equal(1e9)
+    await instance.addMinter(accountTwo, { from: accountOne })
+    await instance.mint(1000, { from: accountTwo })
+    const newSupply = await instance.totalSupply.call()
+    expect(newSupply.valueOf().toNumber()).to.equal(1e9 + 1000)
+    try {
+      await instance.mint(1000, { from: accountThree })
+      expect(true).to.be.false
+    } catch (error) {
+      expect(true).to.be.true
+    }
+  })
+
+  it('should lend', async function () {
+    const instance = await IronCoin.deployed()
+    await instance.lend(100, { from: accountThree })
+    const result = await instance.balanceOf.call(accountThree)
+    expect(result.valueOf().toNumber()).to.equal(100)
+    await instance.lend(100, { from: accountFour })
+    const res = await instance.getLend.call(accountFour)
+    expect(res.valueOf().toNumber()).to.equal(110)
+  })
+
+  it('should refund', async function () {
+    const instance = await IronCoin.deployed()
+    await instance.lend(10000, { from: accountThree })
+    const result = await instance.getLend.call(accountThree)
+    await instance.refund(100, { from: accountThree })
+    const res = await instance.getLend.call(accountThree)
+    expect(res.valueOf().toNumber()).to.equal(result.valueOf().toNumber() - 100)
+    try {
+      await instance.refund(9999999, { from: accountThree })
+      expect(true).to.be.true
+    } catch (error) {
+      expect(false).to.be.false
+    }
+  })
+
+  it('should return totalLends', async function () {
+    const instance = await IronCoin.deployed()
+    const result = await instance.totalLends.call()
+    expect(result.valueOf().toNumber()).to.be.above(0)
   })
 })
