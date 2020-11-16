@@ -27,25 +27,54 @@ const initialState = {
   sending: {
     valueContent: 0,
     to: '',
-  }
+  },
 }
 
-const connectEthereum = (state, action) => ({
-  ...state,
-  ready: true,
-  account: action.account,
-  interface: ContractInterface,
-  contract: action.contract,
-})
+const connectEthereum = (state, { account, contract }) => {
+  const ready = true
+  return { ...state, ready, account, interface: ContractInterface, contract }
+}
 
-const sendCoinType = (state, sendCoins) => ({
-  ...state,
-  sendCoins,
-  sending: {
-    valueContent: 0,
-    to: '',
-  },
-})
+const sendCoinType = (state, sendCoins) => {
+  const sending = { valueContent: 0, to: '' }
+  return { ...state, sendCoins, sending }
+}
+
+const updateValueContent = (state, { value }) => {
+  const sending = { ...state.sending, valueContent: value }
+  return { ...state, sending }
+}
+
+const updateRecipientContent = (state, { to }) => {
+  const sending = { ...state.sending, to }
+  return { ...state, sending }
+}
+
+const updateIroncoinBalance = (state, { balance }) => {
+  return { ...state, ironcoinBalance: balance }
+}
+
+const updateEthereumBalance = (state, { balance }) => {
+  return { ...state, ethereumBalance: balance }
+}
+
+const updateBitcoinValue = (state, { price }) => {
+  return { ...state, bitcoinCurrentValue: price }
+}
+
+const updateBitcoinValues = (state, { prices }) => {
+  return { ...state, bitcoinValues: prices }
+}
+
+const addIroncoin = (state, { coins }) => {
+  const ironcoinBalance = state.ironcoinBalance + coins
+  return { ...state, ironcoinBalance }
+}
+
+const removeIroncoin = (state, { coins }) => {
+  const ironcoinBalance = state.ironcoinBalance - coins
+  return { ...state, ironcoinBalance }
+}
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -56,51 +85,21 @@ const reducer = (state = initialState, action) => {
     case SEND_IRC:
       return sendCoinType(state, IRC)
     case UPDATE_VALUE_CONTENT:
-      return {
-        ...state,
-        sending: {
-          ...state.sending,
-          valueContent: action.value,
-        }
-      }
+      return updateValueContent(state, action)
     case UPDATE_RECIPIENT_CONTENT:
-      return {
-        ...state,
-        sending: {
-          ...state.sending,
-          to: action.to,
-        }
-      }
+      return updateRecipientContent(state, action)
     case UPDATE_IRONCOIN_BALANCE:
-      return {
-        ...state,
-        ironcoinBalance: action.balance,
-      }
+      return updateIroncoinBalance(state, action)
     case UPDATE_ETHEREUM_BALANCE:
-      return {
-        ...state,
-        ethereumBalance: action.balance,
-      }
+      return updateEthereumBalance(state, action)
     case UPDATE_BITCOIN_VALUE:
-      return {
-        ...state,
-        bitcoinCurrentValue: action.price,
-      }
+      return updateBitcoinValue(state, action)
     case UPDATE_BITCOIN_VALUES:
-      return {
-        ...state,
-        bitcoinValues: action.prices,
-      }
+      return updateBitcoinValues(state, action)
     case ADD_IRONCOIN:
-      return {
-        ...state,
-        ironcoinBalance: state.ironcoinBalance + action.coins,
-      }
+      return addIroncoin(state, action)
     case REMOVE_IRONCOIN:
-      return {
-        ...state,
-        ironcoinBalance: state.ironcoinBalance - action.coins,
-      }
+      return removeIroncoin(state, action)
     default:
       return state
   }
