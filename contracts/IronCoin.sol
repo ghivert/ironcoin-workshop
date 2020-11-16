@@ -35,7 +35,7 @@ contract IronCoin is Ownable {
   ) Ownable() public {
     version = _version;
     name = "IronCoin";
-    symbol = "RBC";
+    symbol = "IRC";
     decimals = 0;
     balances[msg.sender] = 1e9;
   }
